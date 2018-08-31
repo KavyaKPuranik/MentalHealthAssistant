@@ -4,3 +4,6 @@ Type 'screener' on chatbot to test
 chatbot.html (custom.css is also needed) is the working file
 you can find it inside SampleWeb/src/main/webapp
 Dialogflow intent to refer is 'Start-Screener'
+
+
+UI needs to be made better may be.. but as per the functionality, it is woring now..
