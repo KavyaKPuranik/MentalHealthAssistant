@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>Mental Health Assistant</title>
 	<script type="text/javascript">
 		var accessToken = "b32250b5d97f45118abbf80529249863";
@@ -111,24 +114,97 @@
 					var output = data.result.fulfillment.speech;
 					if(output.localeCompare('button')==0)
 					{
+					var totalMessages = Object.keys(data.result.fulfillment.messages).length;
+					var responseMessage = "<li class='p-1 rounded mb-1'>"+
+											"<div class='receive-msg'>"+
+											"    <img src='https://storage.googleapis.com/cloudprod-apiai/0f875a80-b955-4301-8260-24f6e34c3c02_l.png'>"+
+											"<div class='container-fluid'>"+
+											"  <div class='row'>";
+
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var type = JSON.stringify(data.result.fulfillment.messages[i].type);
+						var val = JSON.stringify(data.result.fulfillment.messages[i].textToSpeech);
+						if(type.includes('simple_response')&&!val.includes('"button"'))
+						{
+						responseMessage = responseMessage +	"    <div class='col-sm-12 rcorners'>"+data.result.fulfillment.messages[i].textToSpeech+"</div>";
+						}
+					}
+					responseMessage = responseMessage +	"  </div><div class='row'>";
+
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var message =data.result.fulfillment.messages[i];
+						var type = JSON.stringify(message.type);
+						var val = JSON.stringify(message.textToSpeech);
+						if(type.includes('suggestion_chips'))
+						{
+							for (var key in message.suggestions) 
+							{
+								if (message.suggestions.hasOwnProperty(key)) 
+								{
+									var val = message.suggestions[key];
+							var buttonClick = 'setInput("'+val.title+'")';
+							var buttons =	"    <div class='col-sm-6'><button type='button' onclick="+buttonClick+" class='btn btn-xs  btn-block btn-success'>"+val.title+
+											"</button></div>";
+							responseMessage = responseMessage + buttons;
+								}
+							}
+						}
+					}
+					responseMessage =	responseMessage +
+											"  </div>"+ 
+											"</div>"+
+											"</div>"+
+										"</li>";
+					setResponse(responseMessage);
+					}
+					else if(output.localeCompare('screener-button')==0)
+					{
 					var buttonClick = 'setInput("next")';
-					setResponse("<li class='p-1 rounded mb-1'>"+
-                                "<div class='receive-msg'>"+
-                                "    <img src='https://storage.googleapis.com/cloudprod-apiai/0f875a80-b955-4301-8260-24f6e34c3c02_l.png'>"+
-								"	<div class='receive-msg-desc  text-center mt-1 ml-1 pl-2 pr-2'>"+
-								"		<div class='row'>"+
-                                "        <div class='col-sm-6'>"+
-								"			<button type='button' onclick='"+buttonClick
-								+"			' style='color:white' class='rounded btn-xs  btn-block btn-success'>"+
-								"			yes</button></div>"+
-                                "        <div class='col-sm-6'>"+
-								"			<button type='button' onclick='"+buttonClick+
-								"			' style='color:white' class='rounded btn-xs  btn-block btn-success'>"+
-								"			no</button></div>"+
-								"		</div>"+
-								"	</div>"+
-                                "</div>"+
-                            "</li>");
+					var totalMessages = Object.keys(data.result.fulfillment.messages).length;
+					var responseMessage = "<li class='p-1 rounded mb-1'>"+
+											"<div class='receive-msg'>"+
+											"    <img src='https://storage.googleapis.com/cloudprod-apiai/0f875a80-b955-4301-8260-24f6e34c3c02_l.png'>"+
+											"<div class='container-fluid'>"+
+											"  <div class='row'>";
+
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var type = JSON.stringify(data.result.fulfillment.messages[i].type);
+						var val = JSON.stringify(data.result.fulfillment.messages[i].textToSpeech);
+						if(type.includes('simple_response')&&!val.includes('"screener-button"'))
+						{
+						responseMessage = responseMessage +	"    <div class='col-sm-12 rcorners'>"+data.result.fulfillment.messages[i].textToSpeech+"</div>";
+						}
+					}
+					responseMessage = responseMessage +	"  </div> <div class='row'>";
+
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var message =data.result.fulfillment.messages[i];
+						var type = JSON.stringify(message.type);
+						var val = JSON.stringify(message.textToSpeech);
+						if(type.includes('suggestion_chips'))
+						{
+							for (var key in message.suggestions) 
+							{
+								if (message.suggestions.hasOwnProperty(key)) 
+								{
+									var val = message.suggestions[key];
+							var buttons =	"    <div class='col-sm-6'><button type='button' onclick="+buttonClick+" class='btn btn-xs  btn-block btn-success'>"+val.title+
+											"</button></div>";
+							responseMessage = responseMessage + buttons;
+								}
+							}
+						}
+					}
+					responseMessage =	responseMessage +
+											"  </div>"+ 
+											"</div>"+
+											"</div>"+
+										"</li>";
+					setResponse(responseMessage);
 					}
 					else
 					setResponse("<li class='p-1 rounded mb-1'>"+
