@@ -76,3 +76,26 @@
 	background-position: left top;
 	background-repeat: repeat;  
 }
+.tooltipicon{
+	position:relative;
+	display :inline-block;
+	
+}
+.tooltiptext{
+	visibility : hidden;	
+	background-color :black;
+	color: #fff;
+	text-align :center;
+	border-radius :6px;
+	padding:4px ;
+	position:absolute;
+	z-index:1;
+	left:50%;
+	bottom : 100%;
+	margin-left: -50%;
+	font-size: 14px;
+	word-break : keep-all;
+}
+ .tooltipicon:hover .tooltiptext{
+ visibility :visible;
+ }
