@@ -69,7 +69,10 @@
 
 .rcorners {
 	border-radius: 5px;
+	background-color:#E6F9FE;
+	/*
 	background-color:BlanchedAlmond;
+	*/
 	background-position: left top;
 	background-repeat: repeat;  
 }
