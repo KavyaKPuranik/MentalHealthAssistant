@@ -1,0 +1,7 @@
+{
+  "name": "Webhook for MeHA",
+  "description": "API.AI webhook for Mental Health Assistant chatbot",
+  "repository": "https://github.com/KavyaKPuranik/MentalHealthAssistant",
+  "logo": "https://storage.googleapis.com/cloudprod-apiai/68e117a8-bb38-48c1-a461-59297f9af6c0_l.png",
+  "keywords": ["api.ai", "natural language"]
+}
