@@ -1,9 +1,5 @@
-Type 'screener' on chatbot to test
+Mental Health Chatbot runs on tomcat server or independenely from MeHA/src/main/webapp
 
+To try out screener questions, type "screener" on chatbot. 
+Please note that only UI and intents have been developed, the screener questions are not currently being ivaluated/save in database.
 
-chatbot.html (custom.css is also needed) is the working file
-you can find it inside SampleWeb/src/main/webapp
-Dialogflow intent to refer is 'Start-Screener'
-
-
-UI needs to be made better may be.. but as per the functionality, it is working now..
