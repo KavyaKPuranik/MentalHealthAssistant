@@ -44,7 +44,7 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-    if req.get("result").get("action") == "mental-health-info":
+    if req.get("action") == "mental-health-info":
         res = processInfo(req)
     res = json.dumps(res, indent=4)
 
@@ -60,7 +60,7 @@ def webhook():
 
 #Mental Health Info
 def processInfo(req):
-    if req.get("result").get("action") != "mental-health-info":
+    if req.get("action") != "mental-health-info":
         return {}
     dm_query = makeDataMuseQuery(req)
     if dm_query is None:
