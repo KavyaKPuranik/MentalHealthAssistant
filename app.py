@@ -44,7 +44,7 @@ def webhook():
 
     print("Request:")
     print(json.dumps(req, indent=4))
-    if req.get("result").get("action") == "mental-health-info"
+    if req.get("result").get("action") == "mental-health-info":
         res = processInfo(req)
     res = json.dumps(res, indent=4)
 
