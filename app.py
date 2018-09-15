@@ -79,9 +79,15 @@ def makeWebhookResult(data):
     #if data.get('response_code') == 210:
      #   speech = "Train may be cancelled or is not scheduled to run"
     return {
+		"result": {
         "fulfillment": {
-			"speech": "Bla bla"
+			"speech": "Bla bla",
+			"messages": [{
+				"type": 0,
+				"speech": "Bla bla"
+			}]
 			}
+		}
     }
 	
 # ------------------------------------query parameter extracting functions---------------------------------------------------
