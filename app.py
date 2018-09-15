@@ -51,6 +51,7 @@ def webhook():
     r = make_response(res)
     print("Response:")
     print(json.dumps(res, indent=4))
+    print(json.dumps(r, indent=4))
     r.headers['Content-Type'] = 'application/json'
     return r
 
@@ -78,9 +79,9 @@ def makeWebhookResult(data):
     #if data.get('response_code') == 210:
      #   speech = "Train may be cancelled or is not scheduled to run"
     return {
-        "speech": "test",
-        "displayText": "test",
-        "source": "webhook-dm"
+        "fulfillment": {
+			"speech": "Bla bla"
+			}
     }
 	
 # ------------------------------------query parameter extracting functions---------------------------------------------------
