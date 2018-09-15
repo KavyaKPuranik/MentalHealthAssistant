@@ -35,6 +35,7 @@
 				switchRecognition();
 			});
 		});
+		
 
 		var recognition;
 
@@ -48,7 +49,7 @@
 			    for (var i = event.resultIndex; i < event.results.length; ++i) {
 			    	text += event.results[i][0].transcript;
 			    }
-			    setInput(text);
+			    setInput(text,text);
 				stopRecognition();
 			};
 			recognition.onend = function() {
@@ -74,13 +75,24 @@
 			}
 		}
 
-		function setInput(text) 
+		function setInput(disp,text) 
+		{
+			$("#input").attr("disabled", false);
+			$(".btn-xs").attr("disabled", true);
+			setResponse("<li class='pl-2 pr-2 bg-primary rounded text-white text-center send-msg mb-1'>"+
+                                disp+"</li>");
+			$("#input").val(text);
+			sendReply();
+		}
+
+		/*function setInput(text) 
 		{
 			$("#input").attr("disabled", false);
 			$(".btn-xs").attr("disabled", true);
 			$("#input").val(text);
 			sendReply();
-		}
+		}*/
+		
 
 		function updateRec() {
 			$("#rec").text(recognition ? "Stop" : "Speak");
@@ -96,14 +108,14 @@
 		}
 		
 
-		
+		/*
 		function customButton(data,keyword,return_val,width) 
 		{
 					$("#input").attr("disabled", true);
 					var totalMessages = Object.keys(data.result.fulfillment.messages).length;
 					var responseMessage = "<li class='p-1 rounded mb-1'>"+
 											"<div class='receive-msg'>"+
-											"    <img src='https://storage.googleapis.com/cloudprod-apiai/0f875a80-b955-4301-8260-24f6e34c3c02_l.png'>"+
+											"    <img src='https://storage.googleapis.com/cloudprod-apiai/68e117a8-bb38-48c1-a461-59297f9af6c0_l.png'>"+
 											"<div class='container-fluid'>"+
 											"  <div class='row'>";
 
@@ -141,10 +153,12 @@
 								if (message.suggestions.hasOwnProperty(key)) 
 								{
 									var val = message.suggestions[key];
+									var disp = '"'+val.title+'"';
 							if(return_val.localeCompare('next')==0)
-								var buttonClick = 'setInput("'+return_val+'")';
+								var buttonClick = 'setInput('+disp+',"'+return_val+'")';
 							else
-								var buttonClick = 'setInput("'+val.title+'")';
+								var buttonClick = 'setInput('+disp+',"'+val.title+'")';
+								//var buttonClick = 'setInput("'+val.title+'")';
 							var buttons =	"    <div class='col-sm-"+width+"' style='margin-top:2px'>"+
 											"		<button type='button' onclick="+buttonClick+" class='btn btn-xs  btn-block btn-warning'>"+
 											val.title+
@@ -156,6 +170,66 @@
 					}
 					responseMessage =	responseMessage +
 											"  </div>"+ 
+											"</div>"+
+											"</div>"+
+										"</li>";
+					setResponse(responseMessage);
+		}
+		*/
+		function buttonDisplay(data,keyword) 
+		{
+					$("#input").attr("disabled", true);
+					var totalMessages = Object.keys(data.result.fulfillment.messages).length;
+					var responseMessage = "<li class='p-1 rounded mb-1'>"+
+											"<div class='receive-msg'>"+
+											"    <img src='https://storage.googleapis.com/cloudprod-apiai/68e117a8-bb38-48c1-a461-59297f9af6c0_l.png'>"+
+											"<div class='container-fluid'>"+
+											"  <div class='row'>";
+					
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var type = JSON.stringify(data.result.fulfillment.messages[i].type);
+						var val = JSON.stringify(data.result.fulfillment.messages[i].textToSpeech);
+						if(type.includes('simple_response')&&!val.includes('"button"'))
+						{
+						responseMessage = responseMessage +	"    <div class='col-sm-12 rcorners' style='margin-top:4px'>"+
+											data.result.fulfillment.messages[i].textToSpeech+"</div>";
+						}
+					}
+					for ( var i = 0; i < totalMessages; i++)
+					{
+						var type = JSON.stringify(data.result.fulfillment.messages[i].type);
+						var val = JSON.stringify(data.result.fulfillment.messages[i].textToSpeech);
+						if(type==4)
+						{
+							var return_val = "";
+							if(data.result.fulfillment.messages[i].payload.hasOwnProperty('instruction'))
+								responseMessage = responseMessage +	"    <div class='col-sm-12 rcorners' style='margin-top:4px'>"+
+											data.result.fulfillment.messages[i].payload.instruction+"</div>";
+							if(data.result.fulfillment.messages[i].payload.hasOwnProperty('return'))
+								return_val = "next";
+							if(data.result.fulfillment.messages[i].payload.hasOwnProperty('Option'))
+							{
+								responseMessage = responseMessage +	"  </div><div class='row' style='margin-top:4px'>";
+								var width = data.result.fulfillment.messages[i].payload.width;
+								for (var key in data.result.fulfillment.messages[i].payload.Option) 
+								{
+									if(return_val.localeCompare('next')==0)
+										var buttonClick = 'setInput(this.value,"'+return_val+'")';
+									else
+										var buttonClick = 'setInput(this.value,this.value)';
+									var buttons =	"    <div class='col-sm-"+width+"' style='margin-top:2px'>"+
+											"		<button type='button' value='"+data.result.fulfillment.messages[i].payload.Option[key].title+
+											"' onclick='"+buttonClick+"' class='btn btn-xs  btn-block btn-warning'>"+
+											data.result.fulfillment.messages[i].payload.Option[key].title+
+											"</button></div>";
+									responseMessage = responseMessage + buttons;
+								}
+								responseMessage =	responseMessage + "  </div>";
+							}
+						}
+					}
+					responseMessage =	responseMessage +
 											"</div>"+
 											"</div>"+
 										"</li>";
@@ -182,7 +256,15 @@
 					var output = data.result.fulfillment.speech;
 					if(output.localeCompare('button')==0)
 					{
+						buttonDisplay(data,output);
+					}/*
+					if(output.localeCompare('button')==0)
+					{
 						customButton(data,output,'ans',6);
+					}
+					else if(output.localeCompare('wide-button')==0)
+					{
+						customButton(data,output,'ans',10);
 					}
 					else if(output.localeCompare('screener-button')==0)
 					{
@@ -191,11 +273,11 @@
 					else if(output.localeCompare('screener-que-button')==0)
 					{
 						customButton(data,output,'next',10);
-					}
+					}*/
 					else
 					setResponse("<li class='p-1 rounded mb-1'>"+
                                 "<div class='receive-msg'>"+
-                                "    <img src='https://storage.googleapis.com/cloudprod-apiai/0f875a80-b955-4301-8260-24f6e34c3c02_l.png'>"+
+                                "    <img src='https://storage.googleapis.com/cloudprod-apiai/68e117a8-bb38-48c1-a461-59297f9af6c0_l.png'>"+
                                 "    <div class='receive-msg-desc  text-center mt-1 ml-1 pl-2 pr-2'>"+
                                 "        <p class='pl-2 pr-2 rounded'>"+output+"</p>"+
                                 "    </div>"+
@@ -247,8 +329,8 @@
                     <div class="col-md-12 message-box border pl-2 pr-2 border-top-0">
                         <input id="input" type="text" class="pl-0 pr-0 w-100" placeholder="Type a message..." />
                         <div class="tools">
-                            <i class="fa fa-home tooltipicon" aria-hidden="true"><span class="tooltiptext">Home</span></i>
-                            <i class="fa fa-link tooltipicon" aria-hidden="true"><span class="tooltiptext">Useful Links</span></i>
+                            <i class="fa fa-home tooltipicon" aria-hidden="true"><span class="tooltiptext" style="white-space: nowrap;">Home</span></i>
+                            <i class="fa fa-link tooltipicon" aria-hidden="true"><span class="tooltiptext" style="white-space: nowrap;">Useful Links</span></i>
                            <!--  <i class="fa fa-meh-o" aria-hidden="true"></i>
                             <i class="fa fa-paperclip" aria-hidden="true"></i>
                             <i class="fa fa-camera" aria-hidden="true"></i>
