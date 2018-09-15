@@ -98,6 +98,11 @@
 		{
 			var text = $("#input").val();
 			$("#input").val("");
+			var timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
+			var random1 = Math.random();
+			var random2 = Math.random();
+			var sessionId = timeStampInMs + random1 + random2;
+			console.log(timeStampInMs, Date.now());
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -106,7 +111,7 @@
 				headers: {
 					"Authorization": "Bearer " + accessToken
 				},
-				data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+				data: JSON.stringify({ query: text, lang: "en", sessionId: sessionId }),
 
 				success: function(data) {
 					//setResponse(JSON.stringify(data, undefined, 2));
