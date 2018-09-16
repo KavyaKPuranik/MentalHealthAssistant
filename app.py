@@ -84,7 +84,6 @@ def makeWebhookResult(data):
 				"text response"
 				]
 			}],
-            "messages": messages,
             "source": "webhook-dm"
     }
 	
