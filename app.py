@@ -53,7 +53,7 @@ def webhook():
     print(json.dumps(res, indent=4))
     print(json.dumps(r, indent=4))
     r.headers['Content-Type'] = 'application/json'
-    return r
+    return make_response(jsonify({'fulfillmentText': "test"}))
 
 
 
