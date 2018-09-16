@@ -48,13 +48,13 @@ def webhook():
     if req.get("queryResult").get("action") == "mental-health-info":
         res = processInfo(req)
     res = json.dumps(res, indent=4)
-
-    r = make_response(jsonify({'fulfillmentText': "test"}))
-    print("Response:")
+    res = 'test'
+    
+    print("Response:" + res)
     
     print(json.dumps(r, indent=4))
     
-    return r
+    return make_response(jsonify({'fulfillmentText': res}))
 
 
 
@@ -79,10 +79,11 @@ def makeWebhookResult(data):
     #speech = data.get('position')
     #if data.get('response_code') == 210:
      #   speech = "Train may be cancelled or is not scheduled to run"
-    return {
-            "fulfillmentText": "fulfillmentText",
-            "source": "webhook-dm"
-    }
+    #return {
+     #       "fulfillmentText": "fulfillmentText",
+      #      "source": "webhook-dm"
+    #}
+	return 'hi'
 	
 # ------------------------------------query parameter extracting functions---------------------------------------------------
 
