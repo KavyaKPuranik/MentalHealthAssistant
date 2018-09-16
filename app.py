@@ -74,7 +74,7 @@ def processInfo(req):
 # ----------------------------------------json data extraction functions---------------------------------------------------
 
 def makeWebhookResult(data):
-    fulfillmentText = data[0]['defs']
+    fulfillmentText = data[0]['defs'][0]
     print('text: '+ fulfillmentText)
     #if data.get('response_code') == 210:
      #   speech = "Train may be cancelled or is not scheduled to run"
