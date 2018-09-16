@@ -80,10 +80,6 @@ def makeWebhookResult(data):
      #   speech = "Train may be cancelled or is not scheduled to run"
     return {
             "fulfillmentText": "fulfillmentText",
-            "fulfillmentMessages": [{"text": [
-				"text response"
-				]
-			}],
             "source": "webhook-dm"
     }
 	
