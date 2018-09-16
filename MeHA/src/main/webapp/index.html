@@ -236,13 +236,18 @@
 					setResponse(responseMessage);
 		}
 		
+		
+		function getRandomInt(max) {
+			  return Math.floor(Math.random() * Math.floor(max));
+			}
+			
 		function sendReply() 
 		{
 			var text = $("#input").val();
 			$("#input").val("");
-			var random1 = Math.random();
-			var random2 = Math.random();
-			var sessionId = timeStampInMs + random1 + random2;
+			var random1 = getRandomInt(100000);
+			var random2 = getRandomInt(100000);
+			var sessionId =  "" + parseInt(Date.now()) + random1 + random2;
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
