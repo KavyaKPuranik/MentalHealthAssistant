@@ -30,7 +30,6 @@ import re
 from flask import Flask
 from flask import request
 from flask import make_response
-from flask import jsonify
 
 # Flask app should start in global layout
 app = Flask(__name__)
@@ -48,13 +47,12 @@ def webhook():
     if req.get("queryResult").get("action") == "mental-health-info":
         res = processInfo(req)
     res = json.dumps(res, indent=4)
-    res = 'test'
-    
-    print("Response:" + res)
-    
-    print(json.dumps(r, indent=4))
-    
-    return make_response(jsonify({'fulfillmentText': res}))
+
+    r = make_response(res)
+    print("Response:")
+    print(json.dumps(res, indent=4))
+    r.headers['Content-Type'] = 'application/json'
+    return r
 
 
 
@@ -79,11 +77,11 @@ def makeWebhookResult(data):
     #speech = data.get('position')
     #if data.get('response_code') == 210:
      #   speech = "Train may be cancelled or is not scheduled to run"
-    #return {
-     #       "fulfillmentText": "fulfillmentText",
-      #      "source": "webhook-dm"
-    #}
-	return 'hi'
+    return {
+        "speech": "test",
+        "displayText": "test",
+        "source": "webhook-dm"
+    }
 	
 # ------------------------------------query parameter extracting functions---------------------------------------------------
 
