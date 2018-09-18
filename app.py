@@ -34,7 +34,7 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-#----------------------------------------Main Entry Point---------------------------------------------------
+#----------------------------------------Entry Point for webhook---------------------------------------------------
 
 baseurl = "https://api.datamuse.com/words?topics=health&md=d&sp="
 
@@ -57,7 +57,6 @@ def webhook():
 
 
 #----------------------------------------processing Funtions---------------------------------------------------
-
 #Mental Health Info
 def processInfo(req):
     if req.get("queryResult").get("action") != "mental-health-info":
@@ -71,8 +70,9 @@ def processInfo(req):
     res = makeWebhookResult(data)
     return res
 
-# ----------------------------------------json data extraction functions---------------------------------------------------
 
+	
+# ----------------------------------------json data extraction functions---------------------------------------------------
 def makeWebhookResult(data):
     fulfillmentText = 'According to datamuse.com, meaning of the word ' + data[0]['word'] + ' is '
     text = data[0]['defs'][0]
@@ -85,10 +85,9 @@ def makeWebhookResult(data):
         "source": "webhook-dm"
     }
 	
+
+	
 # ------------------------------------query parameter extracting functions---------------------------------------------------
-
-
-
 def makeDataMuseQuery(req):
     result = req.get("queryResult")
     parameters = result.get("parameters")
@@ -97,6 +96,14 @@ def makeDataMuseQuery(req):
     if disease is None:
         return None
     return disease
+
+
+#----------------------------------------Entry Point for chatbot---------------------------------------------------
+
+@app.route('/chatbot')
+def hello_name(user):
+    return render_template('index.html')
+
 
 	
 if __name__ == '__main__':
