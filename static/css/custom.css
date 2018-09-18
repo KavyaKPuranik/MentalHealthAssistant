@@ -1,8 +1,22 @@
-.chat-main{
+/*.chat-main{
 	position: fixed;
 	width: 270px;
 	bottom: 0;
 	right: 200px;
+}*/
+/* Show in default resolution screen*/
+.chat-main {
+width: 300px;
+position: fixed;
+margin:0 auto;
+line-height: 1.4em;
+	bottom: 0;
+	right: 200px;
+}
+
+/* If in mobile screen with maximum width 479px. The iPhone screen resolution is 320x480 px (except iPhone4, 640x960) */    
+@media only screen and (max-width: 479px){
+    .chat-main { width: 150%; }
 }
 .chat-header{
 	background: #4267B2;
