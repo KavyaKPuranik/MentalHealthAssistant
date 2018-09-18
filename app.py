@@ -101,7 +101,7 @@ def makeDataMuseQuery(req):
 #----------------------------------------Entry Point for chatbot---------------------------------------------------
 
 @app.route('/chatbot')
-def hello_name(user):
+def chatbot():
     return render_template('index.html')
 
 
