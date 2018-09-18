@@ -3,3 +3,5 @@ Mental Health Chatbot runs on tomcat server or independenely from MeHA/src/main/
 To try out screener questions, type "screener" on chatbot. 
 Please note that only UI and intents have been developed, the screener questions are not currently being ivaluated/save in database.
 
+To try out definitions, give "tell me about alzheimers"
+
