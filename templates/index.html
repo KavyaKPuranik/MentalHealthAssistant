@@ -248,7 +248,21 @@
 			$("#input").val("");
 			var random1 = getRandomInt(100000);
 			var random2 = getRandomInt(100000);
-			var sessionId =  "" + parseInt(Date.now()) + random1 + random2;
+			var timestamp =  "" + parseInt(Date.now()) + random1 + random2;
+			var sessionId ;
+			if (typeof(Storage) !== "undefined") 
+			{
+				// Store
+				if(localStorage.getItem("sessionId")==null)
+				{
+					localStorage.setItem("sessionId", timestamp);
+				}
+				sessionId = localStorage.getItem("sessionId");
+			} 
+			else 
+			{
+				document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+			}
 			$.ajax({
 				type: "POST",
 				url: baseUrl + "query?v=20150910",
@@ -292,6 +306,8 @@
                                 "    </div>"+
                                 "</div>"+
                             "</li>");
+					console.log("SessionID: "+ data.sessionId);
+					console.log("intentName: "+ data.result.metadata.intentName);
 				},
 				error: function() {
 					setResponse("<li class='p-1 rounded mb-1'>"+
