@@ -1,4 +1,4 @@
-Mental Health Chatbot runs on flask server or independenely from template
+Mental Health Chatbot runs on flask server 
 
 To try out screener questions, type "screener" on chatbot. 
 Please note that only UI and intents have been developed, the screener questions are not currently being ivaluated/save in database.
