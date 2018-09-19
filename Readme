@@ -1,7 +1,14 @@
-Mental Health Chatbot runs on tomcat server or independenely from MeHA/src/main/webapp
+Mental Health Chatbot runs on flask server 
 
 To try out screener questions, type "screener" on chatbot. 
 Please note that only UI and intents have been developed, the screener questions are not currently being ivaluated/save in database.
 
 To try out definitions, give "tell me about alzheimers"
+
+Supported browsers:
+Google Chrome 4.0
+Internet Explorer 8.0
+Mozilla FIrefox 3.5
+Safari 4.0	
+Opera 11.5
 
