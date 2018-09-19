@@ -22,7 +22,7 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
-import requests
+#import requests
 import datetime
 import json
 import os
@@ -104,18 +104,18 @@ def makeDataMuseQuery(req):
 
 @app.route('/chatbot')
 def chatbot():
-    url = 'https://api.api.ai/v1/query?v=20150910'
-    payload = {
-    "query": "Screener", 
-    "lang": "en", 
-    "sessionId": "sessionId"
-    }
+#    url = 'https://api.api.ai/v1/query?v=20150910'
+#    payload = {
+#    "query": "Screener", 
+#    "lang": "en", 
+#    "sessionId": "sessionId"
+#    }
     # Adding empty header as parameters are being sent in payload
-    headers = {
-	"Authorization":"Bearer b32250b5d97f45118abbf80529249863",
-	"Content-Type":"application/json; charset=utf8"
-	}
-    r = requests.post(url, data=json.dumps(payload), headers=headers)
+#    headers = {
+#	"Authorization":"Bearer b32250b5d97f45118abbf80529249863",
+#	"Content-Type":"application/json; charset=utf8"
+#	}
+#    r = requests.post(url, data=json.dumps(payload), headers=headers)
 #    print(r.content)
     return render_template('index.html')
 
