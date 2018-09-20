@@ -198,7 +198,8 @@
 									else
 										var buttonClick = 'setInput(this.value,this.value)';
 									var buttons =	"    <div class='col-sm-12 rcorners' style='margin-top:4px'>"+
-											"<a href='"+data.result.fulfillment.messages[i].payload.Links[key].link+"'>"+
+											"<a href='"+data.result.fulfillment.messages[i].payload.Links[key].link+"'"+
+											" rel='noopener noreferrer' target='_blank'>"+
 											data.result.fulfillment.messages[i].payload.Links[key].title+"</a></div>";
 									responseMessage = responseMessage + buttons;
 								}
