@@ -1,4 +1,3 @@
-# -*- coding:utf8 -*-
 # !/usr/bin/env python
 # Copyright 2017 Google Inc. All Rights Reserved.
 #
@@ -75,7 +74,7 @@ def processInfo(req):
 	
 # ----------------------------------------json data extraction functions---------------------------------------------------
 def makeWebhookResult(data):
-    fulfillmentText = 'According to datamuse.com, meaning of the word ' + data[0]['word'] + ' is '
+    fulfillmentText = 'According to datamuse.com, ' + data[0]['word'] + ' is '
     text = data[0]['defs'][0]
     fulfillmentText = fulfillmentText + re.split(r'\t+', text)[1]
     print('text: '+ fulfillmentText)
