@@ -85,7 +85,13 @@ def makeWebhookResult(data):
         "fulfillmentText": fulfillmentText,
         "fulfillmentMessages": [{
             "text": {
-                "text": ["Text defined in Dialogflow's console for the intent that was matched"]
+                "text": [{
+			"text":"For additiona details please refer the link"
+		        },{
+			"link":
+			      {"title":"medicinenet.com"},
+			      {"url":"https://www.medicinenet.com/diseases_and_conditions/article.htm"}
+                        }]
             }
         }],
         "source": "webhook-dm"
