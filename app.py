@@ -85,10 +85,13 @@ def makeWebhookResult(data):
         "fulfillmentText": fulfillmentText,
         "fulfillmentMessages": [{
             "text": {
-                "text": ["For additiona details please refer the link",
-                        "link-title:medicinenet.com",
-                        "link-url:https://www.medicinenet.com/diseases_and_conditions/article.htm"
-                        ]
+                "text": ["For additiona details please refer the link"]
+	    }
+        },{
+            "text": {
+                "text": ["link",
+                        "title:medicinenet.com",
+                        "url:https://www.medicinenet.com/diseases_and_conditions/article.htm"]
             }
         }],
         "source": "webhook-dm"
