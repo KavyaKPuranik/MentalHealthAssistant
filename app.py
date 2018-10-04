@@ -83,6 +83,11 @@ def makeWebhookResult(data):
      #   speech = "Train may be cancelled or is not scheduled to run"
     return {
         "fulfillmentText": fulfillmentText,
+        "fulfillmentMessages": [{
+            "text": {
+                "text": ["Text defined in Dialogflow's console for the intent that was matched"]
+            }
+        }],
         "source": "webhook-dm"
     }
 	
