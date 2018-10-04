@@ -87,7 +87,7 @@ def makeWebhookResult(data):
             "text": {
                 "text": ["For additiona details please refer the link",
                         "link-title:medicinenet.com",
-                        "link-url":"https://www.medicinenet.com/diseases_and_conditions/article.htm"
+                        "link-url:https://www.medicinenet.com/diseases_and_conditions/article.htm"
                         ]
             }
         }],
