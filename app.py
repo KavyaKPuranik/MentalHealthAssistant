@@ -88,10 +88,13 @@ def makeWebhookResult(data):
                 "text": ["For additional details please refer the link"]
 	    }
         },{
+	# 0th element of link will be hardcoded to 'webhook-link'
+	# 1st element of link will be link title
+	# 2nd element of link will be link URL
             "text": {
-                "text": ["webhook-link",
-                        "title:medicinenet.com",
-                        "url:https://www.medicinenet.com/diseases_and_conditions/article.htm"]
+                "text": ["webhook-link", 
+                        "medicinenet.com",
+                        "https://www.medicinenet.com/diseases_and_conditions/article.htm"]
             }
         }],
         "source": "webhook-dm"
