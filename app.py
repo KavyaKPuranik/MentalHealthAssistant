@@ -83,37 +83,17 @@ def makeWebhookResult(data):
      #   speech = "Train may be cancelled or is not scheduled to run"
     return {
         "fulfillmentText": fulfillmentText,
-        "fulfillmentMessages": [{
-            "text": {
-                "text": ["For additional details please refer the link"]
-	    }
-        },{
-	# 0th element of link will be hardcoded to 'webhook-link'
-	# 1st element of link will be link title
-	# 2nd element of link will be link URL
-            "text": {
-                "text": ["webhook-link", 
-                        "medicinenet.com",
-                        "https://www.medicinenet.com/diseases_and_conditions/article.htm"]
-            }
-        }],
         "source": "webhook-dm",
 	"payload": { 
-					"instructions": [{
-						"text": "Wellness-Check app is an internet based program which helps reflect on how you are by answering a few questions on aspects of mental well being and also access basic information on various ways of enhancing the same. You can check it out by clicking the link below -"
+			"instructions": [{
+						"text": fulfillmentText
+					}, {
+						"text": "For additional details please refer the link - "
 					}, {
 						"link": {
-							"title": "Wellness-App",
-							"url": "https://echargementalhealth.nimhans.ac.in/wellness-check/"
+							"title": "medicinenet.com",
+							"url": "https://www.medicinenet.com/diseases_and_conditions/article.htm"
 						}
-					}, {
-						"text": "Have you checked out the wellness check site / intall the app"
-					}],
-					"width": 6,
-					"Option": [{
-						"title": "yes"
-					}, {
-						"title": "no"
 					}]
 		}
     }
