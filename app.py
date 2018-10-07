@@ -98,7 +98,23 @@ def makeWebhookResult(data):
             }
         }],
         "source": "webhook-dm",
-	"payload": { "test":"val"
+	"payload": { 
+					"instructions": [{
+						"text": "Wellness-Check app is an internet based program which helps reflect on how you are by answering a few questions on aspects of mental well being and also access basic information on various ways of enhancing the same. You can check it out by clicking the link below -"
+					}, {
+						"link": {
+							"title": "Wellness-App",
+							"url": "https://echargementalhealth.nimhans.ac.in/wellness-check/"
+						}
+					}, {
+						"text": "Have you checked out the wellness check site / intall the app"
+					}],
+					"width": 6,
+					"Option": [{
+						"title": "yes"
+					}, {
+						"title": "no"
+					}]
 		}
     }
 	
