@@ -96,12 +96,10 @@ def makeWebhookResult(data):
                         "medicinenet.com",
                         "https://www.medicinenet.com/diseases_and_conditions/article.htm"]
             }
-        },
-	{
-		"payload": { "test":"val"
+        }],
+        "source": "webhook-dm",
+	"payload": { "test":"val"
 		}
-	}],
-        "source": "webhook-dm"
     }
 	
 
